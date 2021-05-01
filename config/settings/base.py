@@ -131,8 +131,11 @@ LOGOUT_REDIRECT_URL = '/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filter': {
+    'filters': {
         'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
         },
     },
@@ -168,7 +171,7 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': BASE_DIR / 'logs/mysite.log',
             'maxBytes': 1024*1024*5,
-            'backupcount': 5,
+            'backupCount': 5,
             'formatter': 'standard',
         }
     },
@@ -181,6 +184,10 @@ LOGGING = {
             'handler.server': ['django.server'],
             'level': 'INFO',
             'propagate': False,
+        },
+        'pybo':{
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
         },
     }
 }
